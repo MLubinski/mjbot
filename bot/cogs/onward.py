@@ -9,7 +9,7 @@ class Onward(commands.Cog):
     #Create an Onward PVP/PVE Event for reacts
     @commands.command(name="onward", type=["PVP","PVE"], host="", help="Posts an Onward LFG post by typing '!onward PVP/PVE HOST'")
     async def onward(self, ctx, type, host):
-        ctx.channel = self.client.get_channel(796486608278519838)
+        ctx.channel = self.client.get_channel(796486423456907297)
         message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
         await ctx.message.delete()
         await message.add_reaction('\N{THUMBS UP SIGN}')
