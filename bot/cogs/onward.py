@@ -3,7 +3,7 @@ from discord.ext import commands
 
 class Onward(commands.Cog):
 
-emoji = '\N{THUMBS UP SIGN}'
+    emoji = '\N{THUMBS UP SIGN}'
 
     def __init__(self, client):
         self.client = client

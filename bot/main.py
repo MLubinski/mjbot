@@ -7,7 +7,7 @@ client = commands.Bot(command_prefix="!")
 token = os.getenv("DISCORD_BOT_TOKEN")
 
 @client.event
-async def on_ready() :
+async def on_ready():
     await client.change_presence(status = discord.Status.idle, activity = discord.Game("Doing bot things"))
     watcher = Watcher(client, path='bot/cogs', debug=False)
     await watcher.start()
