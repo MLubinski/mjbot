@@ -3,8 +3,6 @@ from discord.ext import commands
 
 class Onward(commands.Cog):
 
-    emoji = '\N{THUMBS UP SIGN}'
-
     def __init__(self, client):
         self.client = client
 
@@ -14,7 +12,7 @@ class Onward(commands.Cog):
         ctx.channel = self.client.get_channel(850366126528397322)
         message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
         await ctx.message.delete()
-        await message.add_reaction(emoji)
+        await message.add_reaction('\N{THUMBS UP SIGN}')
 
 
 def setup(client):
