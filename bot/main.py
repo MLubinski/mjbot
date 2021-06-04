@@ -13,11 +13,11 @@ async def on_ready() :
     await watcher.start()
     print("Bot is ready.")
 
-@client.command()
+@client.command(hidden=True)
 async def load(ctx, extension):
     client.load_extension(f'cogs.{extension}')
 
-@client.command()
+@client.command(hidden=True)
 async def unload(ctx, extension):
     client.unload_extension(f'cogs.{extension}')
 
