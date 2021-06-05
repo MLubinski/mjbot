@@ -1,5 +1,6 @@
-import discord
+import discord, os
 from discord.ext import commands
+from typing import Optional
 
 class Onward(commands.Cog):
 
@@ -7,6 +8,7 @@ class Onward(commands.Cog):
         self.client = client
         self.last_message = ""
         self.open_lobby = False
+        self.channel = 796486608278519838
 
     #Create an Onward PVP/PVE lobby for reactions.
     @commands.command(name="onward", type=["PVP","PVE"], host="", help="Posts an Onward LFG post by typing '!onward PVP/PVE HOST'")
@@ -15,7 +17,7 @@ class Onward(commands.Cog):
             await ctx.message.delete()
             await ctx.message.author.send("There is already another lobby open. Go join that one.")
         else:
-            ctx.channel = self.client.get_channel(796486608278519838)
+            ctx.channel = self.client.get_channel(self.channel)
             message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
             await ctx.message.delete()
             await message.add_reaction('\N{THUMBS UP SIGN}')
@@ -24,7 +26,7 @@ class Onward(commands.Cog):
             #print(f"Last message is {message.id}. The lobby is {self.open_lobby}")
 
     #Ends the Onward PVP/PVE lobby that was previously opened.
-    @commands.command(name="end")
+    @commands.command(name="end", help="This command will end the open lobby and make room for another one.\n **!end**")
     async def end(self, ctx):
         #print(f"The start. Last message is {self.last_message.id}.")
         await self.last_message.delete()
