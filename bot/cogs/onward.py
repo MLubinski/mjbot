@@ -1,4 +1,4 @@
-import discord, os
+import discord, os, asyncio
 from discord.ext import commands
 from typing import Optional
 
@@ -8,20 +8,27 @@ class Onward(commands.Cog):
         self.client = client
         self.last_message = ""
         self.open_lobby = False
-        self.channel = 796486608278519838
+        self.channel = 850366126528397322
 
     #Create an Onward PVP/PVE lobby for reactions.
     @commands.command(name="onward", type=["PVP","PVE"], host="", help="Posts an Onward LFG post by typing '!onward PVP/PVE HOST'")
-    async def onward(self, ctx, type, host):
+    #@commands.cooldown(rate=1, per=5)
+    async def onward(self, ctx, type):
         if self.open_lobby:
             await ctx.message.delete()
             await ctx.message.author.send("There is already another lobby open. Go join that one.")
         else:
+            host = ctx.author.name
             ctx.channel = self.client.get_channel(self.channel)
-            message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
+            #message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
+            embed=discord.Embed(title=f"{host} is hosting an Onward {type} lobby.", description=f"React to this message to receive your points for the monthly leaderboard.")
+            embed.add_field(name='Host', value=host, inline=True)
+            embed.add_field(name='Type', value=type, inline=True)
+            embed.set_thumbnail(url='https://i.imgur.com/cAJixfU.png')
+            msg = await ctx.send(embed=embed)
             await ctx.message.delete()
-            await message.add_reaction('\N{THUMBS UP SIGN}')
-            self.last_message = message
+            await msg.add_reaction('\N{THUMBS UP SIGN}')
+            self.last_message = msg
             self.open_lobby = True
             #print(f"Last message is {message.id}. The lobby is {self.open_lobby}")
 
