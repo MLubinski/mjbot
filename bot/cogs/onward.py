@@ -15,7 +15,7 @@ class Onward(commands.Cog):
             await ctx.message.delete()
             await ctx.message.author.send("There is already another lobby open. Go join that one.")
         else:
-            ctx.channel = self.client.get_channel(850366126528397322)
+            ctx.channel = self.client.get_channel(796486608278519838)
             message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
             await ctx.message.delete()
             await message.add_reaction('\N{THUMBS UP SIGN}')
