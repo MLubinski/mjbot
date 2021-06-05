@@ -27,5 +27,9 @@ for filename in os.listdir('bot/cogs'):
   else:
     print(f'Unable to load {filename[:-3]}')
 
+def save_message(message):
+    file = open('messages.txt')
+    file.write(message.content + '\n')
+    file.close()
 
 client.run(token)

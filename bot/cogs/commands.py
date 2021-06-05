@@ -15,9 +15,8 @@ class Commands(commands.Cog):
 
     #@commands.has_role('Admin')
     @commands.command(hidden=True)
-    async def clear(self, ctx, amount=100) :
+    async def clear(self, ctx, amount=10) :
         await ctx.channel.purge(limit=amount)
-
 
 def setup(client):
     client.add_cog(Commands(client))
