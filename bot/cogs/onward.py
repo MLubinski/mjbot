@@ -21,6 +21,7 @@ class Onward(commands.Cog):
             self.last_message
         else:
             host = ctx.author.name
+            type = ' '.join(type)
             ctx.channel = self.client.get_channel(self.channel)
             #message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
             embed=discord.Embed(title=f"{host} is hosting an Onward {type} lobby.", description=f"React to this message to receive your points for the monthly leaderboard.")
@@ -48,7 +49,7 @@ class Onward(commands.Cog):
                     users.add(user)
 
         if len(users) > 0:
-            description = f"Thanks for playing **@{', '.join(str(user.name) for user in users)}**!"
+            description = f"Thanks for playing **{', '.join(str(user.name) for user in users)}**!"
         else:
             description = f"No one joined this lobby { author }. You better find new friends."
 
