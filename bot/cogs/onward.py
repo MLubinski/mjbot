@@ -15,6 +15,7 @@ class Onward(commands.Cog):
     @commands.command(name="onward", type=["PVP","PVE"], host="", help="Posts an Onward LFG post by typing '!onward PVP/PVE HOST'")
     #@commands.cooldown(rate=1, per=5)
     async def onward(self, ctx, *type):
+
         if self.open_lobby:
             await ctx.message.delete()
             await ctx.message.author.send("There is already another lobby open. Go join that one.")
@@ -22,6 +23,7 @@ class Onward(commands.Cog):
         else:
             host = ctx.author.name
             type = ' '.join(type)
+
             ctx.channel = self.client.get_channel(self.channel)
             #message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
             embed=discord.Embed(title=f"{host} is hosting an Onward {type} lobby.", description=f"React to this message to receive your points for the monthly leaderboard.")
@@ -47,9 +49,9 @@ class Onward(commands.Cog):
             async for user in each.users():
                 if user.bot == False:
                     users.add(user)
-                    points_add = await ctx.send(f"Example point add statement for { user }.")
-                    await asyncio.sleep(5)
-                    await points_add.delete()
+                    #points_add = await ctx.send(f"Example point add statement for { user }.")
+                    #await asyncio.sleep(5)
+                    #await points_add.delete()
 
         if len(users) > 0:
             description = f"Thanks for playing **{', '.join(str(user.name) for user in users)}**!"
@@ -61,10 +63,14 @@ class Onward(commands.Cog):
         await self.last_message.delete()
         await ctx.message.delete()
         await asyncio.sleep(5)
-        await reaction_counter.delete()
+        #await reaction_counter.delete()
 
         self.open_lobby = False
 
+def get_channel(ctx, name=None):
+    for channel in ctx.guild.channels:
+        if channel.name == name:
+            return channel.id
 
 def setup(client):
     client.add_cog(Onward(client))
