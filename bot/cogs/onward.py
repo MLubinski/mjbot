@@ -8,7 +8,8 @@ class Onward(commands.Cog):
         self.client = client
         self.last_message = ""
         self.open_lobby = False
-        self.channel = 796486608278519838
+        self.channel = 850366126528397322
+        self.emoji = '\N{THUMBS UP SIGN}'
 
     #Create an Onward PVP/PVE lobby for reactions.
     @commands.command(name="onward", type=["PVP","PVE"], host="", help="Posts an Onward LFG post by typing '!onward PVP/PVE HOST'")
@@ -17,6 +18,7 @@ class Onward(commands.Cog):
         if self.open_lobby:
             await ctx.message.delete()
             await ctx.message.author.send("There is already another lobby open. Go join that one.")
+            self.last_message
         else:
             host = ctx.author.name
             ctx.channel = self.client.get_channel(self.channel)
@@ -27,19 +29,30 @@ class Onward(commands.Cog):
             embed.set_thumbnail(url='https://i.imgur.com/cAJixfU.png')
             msg = await ctx.send(embed=embed)
             await ctx.message.delete()
-            await msg.add_reaction('\N{THUMBS UP SIGN}')
+            await msg.add_reaction(self.emoji)
             self.last_message = msg
             self.open_lobby = True
             #print(f"Last message is {message.id}. The lobby is {self.open_lobby}")
 
     #Ends the Onward PVP/PVE lobby that was previously opened.
-    @commands.command(name="end", help="This command will end the open lobby and make room for another one.\n **!end**")
+    @commands.command(name="end", help="This command will end the open lobby and make room for another one.\n **!end**", pass_context = True)
     async def end(self, ctx):
-        #print(f"The start. Last message is {self.last_message.id}.")
+        users = set()
+        #print(f"The start. Last message is {self.last_message}.")
+        channel = self.client.get_channel(self.last_message.channel.id)
+        message = await channel.fetch_message(self.last_message.id)
+        for each in message.reactions:
+            async for user in each.users():
+                users.add(user)
+        reaction_counter = await ctx.send(f"The following users played in this lobby: {', '.join(user.name for user in users)}")
+
         await self.last_message.delete()
         await ctx.message.delete()
-        #print(f"Deleted last message {self.last_message.id}. The lobby is {self.open_lobby}")
+        await asyncio.sleep(5)
+        await reaction_counter.delete()
+
         self.open_lobby = False
+
 
 def setup(client):
     client.add_cog(Onward(client))
