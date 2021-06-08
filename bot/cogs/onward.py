@@ -23,12 +23,13 @@ class Onward(commands.Cog):
         if self.open_lobby:
             await ctx.message.delete()
             await ctx.message.author.send("There is already another lobby open. Go join that one.")
-            self.last_message
+            #self.last_message
         else:
             host = ctx.author.name
             type = ' '.join(type)
-
             ctx.channel = self.client.get_channel(self.mj_lfg_channel)
+            #onward_role = discord.utils.get(ctx.guild.roles)
+
             #message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
             embed=discord.Embed(title=f"{host} is hosting an Onward {type} lobby.", description=f"React to this message to receive your points for the monthly leaderboard.")
             embed.add_field(name='Host', value=host, inline=True)
