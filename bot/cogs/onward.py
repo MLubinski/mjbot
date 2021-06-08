@@ -48,7 +48,7 @@ class Onward(commands.Cog):
                 if user.bot == False:
                     users.add(user)
                     points_add = await ctx.send(f"Example point add statement for { user }.")
-                    await asyncio.sleep(1)
+                    await asyncio.sleep(5)
                     await points_add.delete()
 
         if len(users) > 0:
