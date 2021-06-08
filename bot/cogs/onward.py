@@ -17,19 +17,17 @@ class Onward(commands.Cog):
         self.emoji = '\N{THUMBS UP SIGN}'
 
     #Create an Onward PVP/PVE lobby for reactions.
-    @commands.command(name="onward", type=["PVP","PVE"], host="", help="Posts an Onward LFG post.\n Usage:**'!onward PVP/PVE'**")
+    @commands.command(name="onward", type="", host="", help="Posts an Onward LFG post.\n Usage:**'!onward PVP/PVE'**")
     @commands.cooldown(rate=1, per=3)
     async def onward(self, ctx, *type):
-
         if self.open_lobby:
             await ctx.message.delete()
             await ctx.message.author.send("There is already another lobby open. Go join that one.")
-            #self.last_message
         else:
             host = ctx.author.name
             type = ' '.join(type)
             ctx.channel = self.client.get_channel(self.mj_lfg_channel)
-            embed=discord.Embed(title=f"{host} is hosting an Onward {type} lobby.", description=f"React to this message to receive your points for the monthly leaderboard.")
+            embed=discord.Embed(title=f"{host} is playing Onward. {type}", description=f"React to this message to receive your points for the monthly leaderboard.")
             embed.add_field(name='Host', value=host, inline=True)
             embed.add_field(name='Type', value=type, inline=True)
             embed.set_thumbnail(url='https://i.imgur.com/cAJixfU.png')
