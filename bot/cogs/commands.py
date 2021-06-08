@@ -14,7 +14,7 @@ class Commands(commands.Cog):
             for channel in guild.text_channels:
                 await ctx.send(f"{channel.name} {channel.id}")
 
-    #commands.has_role('Admin')
+    @commands.has_role('Admin')
     #@commands.cooldown(rate=1, per=60)
     @commands.command(hidden=True)
     async def clearjodie(self, ctx, amount=2) :
