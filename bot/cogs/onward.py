@@ -8,7 +8,7 @@ class Onward(commands.Cog):
         self.client = client
         self.last_message = ""
         self.open_lobby = False
-        self.channel = 850366126528397322
+        self.channel = 796486608278519838
         self.emoji = '\N{THUMBS UP SIGN}'
 
     #Create an Onward PVP/PVE lobby for reactions.
