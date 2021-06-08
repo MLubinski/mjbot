@@ -15,9 +15,9 @@ class Commands(commands.Cog):
                 await ctx.send(f"{channel.name} {channel.id}")
 
     @commands.has_role('Admin')
-    @commands.cooldown(rate=1, per=60)
+    #@commands.cooldown(rate=1, per=60)
     @commands.command(hidden=True)
-    async def clear(self, ctx, amount=1) :
+    async def clearjodie(self, ctx, amount=2) :
         await ctx.channel.purge(limit=amount)
 
 def setup(client):
