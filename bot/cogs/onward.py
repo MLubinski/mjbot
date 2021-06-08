@@ -48,6 +48,7 @@ class Onward(commands.Cog):
         users = set()
         author = ctx.author.name
         time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        community_role = discord.utils.get(ctx.guild.roles, id=self.mj_community_support_id)
         #print(f"The start. Last message is {self.last_message}.")
         channel = self.client.get_channel(self.last_message.channel.id)
         message = await channel.fetch_message(self.last_message.id)
@@ -60,8 +61,7 @@ class Onward(commands.Cog):
             description = f"Thanks for playing **{', '.join(str(f'<@!{user.id}>') for user in users)}**!"
         else:
             description = f"No one joined this lobby { author }. You better find new friends."
-
-        embed = discord.Embed(title=f"Recent Lobby Report <@!{self.mj_community_support_id}>", description=description)
+        embed = discord.Embed(title=f"Recent Lobby Report <@!{community_role}>", description=description)
         embed.set_footer(text=f"Lobby closed at {time}")
         ctx.channel = self.client.get_channel(self.mj_report_channel)
         reaction_counter = await ctx.send(embed=embed)
