@@ -13,6 +13,7 @@ class Onward(commands.Cog):
         self.report_channel = 850448818548899881
         self.mj_lfg_channel = 799871582897438750
         self.mj_report_channel = 827259886681194556
+        self.mj_community_support_id = 851556193809727488
         self.emoji = '\N{THUMBS UP SIGN}'
 
     #Create an Onward PVP/PVE lobby for reactions.
@@ -60,7 +61,7 @@ class Onward(commands.Cog):
         else:
             description = f"No one joined this lobby { author }. You better find new friends."
 
-        embed = discord.Embed(title="Recent Lobby Report", description=description)
+        embed = discord.Embed(title=f"Recent Lobby Report <@&{self.mj_community_support_id}>", description=description)
         embed.set_footer(text=f"Lobby closed at {time}")
         ctx.channel = self.client.get_channel(self.mj_report_channel)
         reaction_counter = await ctx.send(embed=embed)
