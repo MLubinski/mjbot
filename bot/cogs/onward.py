@@ -29,7 +29,6 @@ class Onward(commands.Cog):
             host = ctx.author.name
             type = ' '.join(type)
             ctx.channel = self.client.get_channel(self.mj_lfg_channel)
-            #onward_role = discord.utils.get(ctx.guild.roles)
             embed=discord.Embed(title=f"{host} is hosting an Onward {type} lobby.", description=f"React to this message to receive your points for the monthly leaderboard.")
             embed.add_field(name='Host', value=host, inline=True)
             embed.add_field(name='Type', value=type, inline=True)
@@ -48,7 +47,7 @@ class Onward(commands.Cog):
         users = set()
         author = ctx.author.name
         time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        community_role = discord.utils.get(ctx.guild.roles, id=self.mj_community_support_id)
+        community_role = ctx.guild.get_role(822074164033617940)
         #print(f"The start. Last message is {self.last_message}.")
         channel = self.client.get_channel(self.last_message.channel.id)
         message = await channel.fetch_message(self.last_message.id)
@@ -58,10 +57,10 @@ class Onward(commands.Cog):
                     users.add(user)
 
         if len(users) > 0:
-            description = f"Thanks for playing **{', '.join(str(f'<@!{user.id}>') for user in users)}**!"
+            description = f"<@&{community_role.id}> Thanks for playing **{', '.join(str(f'<@!{user.id}>') for user in users)}**!"
         else:
             description = f"No one joined this lobby { author }. You better find new friends."
-        embed = discord.Embed(title=f"Recent Lobby Report <@!{community_role}>", description=description)
+        embed = discord.Embed(title=f"Recent Lobby Report", description=description)
         embed.set_footer(text=f"Lobby closed at {time}")
         ctx.channel = self.client.get_channel(self.mj_report_channel)
         reaction_counter = await ctx.send(embed=embed)
