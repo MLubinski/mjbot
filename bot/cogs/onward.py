@@ -47,7 +47,9 @@ class Onward(commands.Cog):
             async for user in each.users():
                 if user.bot == False:
                     users.add(user)
-                    await ctx.send(f"Example point add statement for { user }.")
+                    points_add = await ctx.send(f"Example point add statement for { user }.")
+                    await asyncio.sleep(1)
+                    await points_add.delete()
 
         if len(users) > 0:
             description = f"Thanks for playing **{', '.join(str(user.name) for user in users)}**!"
