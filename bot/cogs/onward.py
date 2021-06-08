@@ -11,9 +11,9 @@ class Onward(commands.Cog):
         self.open_lobby = False
         self.lfg_channel = 850366126528397322
         self.report_channel = 850448818548899881
-        self.mj_lfg_hannel = 799871582897438750
+        self.mj_lfg_channel = 799871582897438750
         self.mj_report_channel = 827259886681194556
-        self.emoji = ':smalllogo:'
+        self.emoji = '\N{THUMBS UP SIGN}'
 
     #Create an Onward PVP/PVE lobby for reactions.
     @commands.command(name="onward", type=["PVP","PVE"], host="", help="Posts an Onward LFG post.\n Usage:**'!onward PVP/PVE'**")
@@ -29,8 +29,6 @@ class Onward(commands.Cog):
             type = ' '.join(type)
             ctx.channel = self.client.get_channel(self.mj_lfg_channel)
             #onward_role = discord.utils.get(ctx.guild.roles)
-
-            #message = await ctx.send(f"**{host} is hosting an Onward {type} lobby**\n React for points and join.")
             embed=discord.Embed(title=f"{host} is hosting an Onward {type} lobby.", description=f"React to this message to receive your points for the monthly leaderboard.")
             embed.add_field(name='Host', value=host, inline=True)
             embed.add_field(name='Type', value=type, inline=True)
