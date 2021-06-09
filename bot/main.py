@@ -9,8 +9,6 @@ token = os.getenv("DISCORD_BOT_TOKEN")
 @client.event
 async def on_ready():
     await client.change_presence(status = discord.Status.idle, activity = discord.Game("Waiting for people to play games"))
-    #watcher = Watcher(client=client, path='bot/cogs', debug=False)
-    #await watcher.start()
     print("Bot is ready.")
 
 @client.command(hidden=True)

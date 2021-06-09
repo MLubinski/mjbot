@@ -2,6 +2,7 @@ import discord, os, asyncio
 from discord.ext import commands
 from typing import Optional
 import datetime
+#799871056251977748 MJ Guild ID
 
 class Onward(commands.Cog):
 
@@ -15,6 +16,11 @@ class Onward(commands.Cog):
         self.mj_report_channel = 827259886681194556
         self.mj_community_support_id = 851556193809727488
         self.emoji = '\N{THUMBS UP SIGN}'
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        for guild in self.client.guilds:
+            print(f'{guild.name}, {guild.id}')
 
     #Create an Onward PVP/PVE lobby for reactions.
     @commands.command(name="onward", type="", host="", help="Posts an Onward LFG post.\n Usage:**'!onward PVP/PVE'**")
