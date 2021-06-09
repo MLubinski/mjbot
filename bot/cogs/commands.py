@@ -21,7 +21,7 @@ class Commands(commands.Cog):
         await ctx.channel.purge(limit=amount)
 
     @client.command(pass_context=True)
-    async def getguild(ctx):
+    async def getguild(self, ctx):
         guild = ctx.message.guild
         ctx.send(guild)
 
