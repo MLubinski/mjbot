@@ -20,5 +20,10 @@ class Commands(commands.Cog):
     async def clearjodie(self, ctx, amount=2) :
         await ctx.channel.purge(limit=amount)
 
+    @client.command(pass_context=True)
+    async def getguild(ctx):
+        guild = ctx.message.guild
+        ctx.send(guild)
+
 def setup(client):
     client.add_cog(Commands(client))
