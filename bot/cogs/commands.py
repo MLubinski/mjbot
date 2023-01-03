@@ -5,6 +5,7 @@ class Commands(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        self.mikeadmin = 103634856709230592
 
     @commands.has_role('Admin')
     @commands.cooldown(rate=1, per=60)
